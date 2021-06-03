@@ -12,7 +12,7 @@ use App\Domain\Model\Hit\SearchEngineName;
 use App\Domain\Repository\HitRepositoryInterface;
 use Symfony\Component\Uid\Uuid;
 
-class InMemoryHitRepository
+class InMemoryHitRepository implements HitRepositoryInterface
 {
     /** @var Hit[] */
     private array $hits = [];
