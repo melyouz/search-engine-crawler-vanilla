@@ -1,0 +1,35 @@
+parameters:
+    app.name: 'SearchEngineCrawler'
+    app.version: 'v1.0'
+    app.hits.google_url: https://www.google.com/search
+    app.hits.bing_url: https://www.bing.com/search
+    app.hits.duckduckgo_url: https://html.duckduckgo.com/html/
+    app.mysql.host: 'localhost'
+    app.mysql.username: 'search-engine-crawler'
+    app.mysql.password: 'search-engine-crawler'
+    app.mysql.database: 'search-engine-crawler'
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        bind:
+            $googleUrl: '%app.hits.google_url%'
+            $bingUrl: '%app.hits.bing_url%'
+            $duckduckgoUrl: '%app.hits.duckduckgo_url%'
+            $mysqlHost: '%app.mysql.host%'
+            $mysqlUsername: '%app.mysql.username%'
+            $mysqlPassword: '%app.mysql.password%'
+            $mysqlDatabase: '%app.mysql.database%'
+    App\:
+        resource: '../src/'
+        exclude: ~
+
+    App\Presentation\Api\Controller\:
+        public: true
+        resource: '../src/Presentation/Api/Controller/'
+        tags: ['controller.service_arguments']
+
+    App\Domain\Repository\HitRepositoryInterface:
+        alias: App\Infrastructure\Persistence\Mysql\Repository\MysqlHitRepository
+        #alias: App\Infrastructure\Persistence\InMemory\Repository\InMemoryHitRepository

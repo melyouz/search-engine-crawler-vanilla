@@ -1,0 +1,23 @@
+header nav {
+    background-color: #753474 !important;
+}
+
+main {
+    margin-top: 120px;
+}
+
+main .btn.btn-primary {
+    background-color: #753474 !important;
+    border-color: #753474 !important;
+}
+
+#searchResults {
+    max-height: 400px;
+    overflow: auto;
+}
+
+footer {
+    height: 60px;
+    line-height: 60px;
+    background-color: #f5f5f5;
+}
