@@ -35,7 +35,7 @@ class Connection
     {
         $st = $this->conn->prepare($query);
         $st->execute($params);
-        
+
         return $st->fetchAll();
     }
 }

@@ -17,7 +17,7 @@ class Request
     {
         $query = [];
 
-        foreach($_GET as $key => $value) {
+        foreach ($_GET as $key => $value) {
             $query[$key] = filter_input(INPUT_GET, $key, FILTER_SANITIZE_STRING);
         }
 

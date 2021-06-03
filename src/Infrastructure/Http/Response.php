@@ -31,7 +31,7 @@ class Response
         $statusMessage = self::HTTP_STATUS_MESSAGES[$this->statusCode] ?? '';
         header(sprintf('%s %d %s', $protocol, $this->statusCode, $statusMessage));
 
-        foreach($this->headers as $key => $value) {
+        foreach ($this->headers as $key => $value) {
             header("$key: $value");
         }
     }

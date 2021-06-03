@@ -33,6 +33,11 @@ class DomainHitCount implements \JsonSerializable
         return new self(Domain::fromString($data['domain']), $data['count']);
     }
 
+    public function jsonSerialize(): array
+    {
+        return ['domain' => $this->getDomain()->value(), 'count' => $this->getCount()];
+    }
+
     public function getDomain(): Domain
     {
         return $this->domain;
@@ -41,10 +46,5 @@ class DomainHitCount implements \JsonSerializable
     public function getCount(): int
     {
         return $this->count;
-    }
-
-    public function jsonSerialize(): array
-    {
-        return ['domain' => $this->getDomain()->value(), 'count' => $this->getCount()];
     }
 }

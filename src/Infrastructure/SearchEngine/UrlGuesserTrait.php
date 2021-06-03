@@ -8,21 +8,21 @@ use App\Domain\Model\Hit\Domain;
 
 trait UrlGuesserTrait
 {
-    private function guessDestUrlHostByUrl(string $destUrl): ?string
+    private function guessDomains(array $links, ?string $pathParamName = null): array
     {
-        $destUrlIsValid = (bool)filter_var($destUrl, FILTER_VALIDATE_URL);
+        $domains = [];
+        foreach ($links as $item) {
+            $href = $item->attributes->getNamedItem('href')->nodeValue;
+            $destUrlHost = ($pathParamName ? $this->guessDestUrlHostBySelfPath($href, $pathParamName) : $this->guessDestUrlHostByUrl($href));
 
-        if (!$destUrlIsValid) {
-            return null;
+            if (!$destUrlHost) {
+                continue;
+            }
+
+            $domains[] = Domain::fromString($destUrlHost);
         }
 
-        $urlComponents = parse_url($destUrl);
-
-        if (!isset($urlComponents['host'])) {
-            return null;
-        }
-
-        return $urlComponents['host'];
+        return $domains;
     }
 
     private function guessDestUrlHostBySelfPath(string $destPath, string $paramName): ?string
@@ -56,20 +56,20 @@ trait UrlGuesserTrait
         return $urlComponents['host'];
     }
 
-    private function guessDomains(array $links, ?string $pathParamName = null): array
+    private function guessDestUrlHostByUrl(string $destUrl): ?string
     {
-        $domains = [];
-        foreach ($links as $item) {
-            $href = $item->attributes->getNamedItem('href')->nodeValue;
-            $destUrlHost = ($pathParamName ? $this->guessDestUrlHostBySelfPath($href, $pathParamName) : $this->guessDestUrlHostByUrl($href));
+        $destUrlIsValid = (bool)filter_var($destUrl, FILTER_VALIDATE_URL);
 
-            if (!$destUrlHost) {
-                continue;
-            }
-
-            $domains[] = Domain::fromString($destUrlHost);
+        if (!$destUrlIsValid) {
+            return null;
         }
 
-        return $domains;
+        $urlComponents = parse_url($destUrl);
+
+        if (!isset($urlComponents['host'])) {
+            return null;
+        }
+
+        return $urlComponents['host'];
     }
 }

@@ -11,6 +11,7 @@ class DuckduckgoSearchEngine implements SearchEngineInterface
 {
     use HtmlFetcherTrait;
     use UrlGuesserTrait;
+
     private string $url;
 
     public function __construct(string $duckduckgoUrl)

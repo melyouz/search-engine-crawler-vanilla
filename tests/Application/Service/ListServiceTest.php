@@ -39,7 +39,7 @@ class ListServiceTest extends TestCase
             new Hit($repository->nextIdentity(), SearchEngineName::fromString(SearchEngineName::DUCKDUCKGO), SearchTerm::fromString('linkedin'), Domain::fromString('es.linkedin.com')),
         ];
 
-        foreach($hits as $hit) {
+        foreach ($hits as $hit) {
             $repository->save($hit);
         }
     }

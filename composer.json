@@ -10,13 +10,12 @@
         }
     ],
     "require": {
-        "symfony/dotenv": "^5.3",
+        "beberlei/assert": "^3.3",
+        "symfony/uid": "^5.3",
         "symfony/dependency-injection": "^5.3",
         "symfony/config": "^5.3",
         "symfony/yaml": "^5.3",
         "symfony/error-handler": "^5.3",
-        "symfony/uid": "^5.3",
-        "beberlei/assert": "^3.3",
         "symfony/dom-crawler": "^5.3",
         "symfony/css-selector": "^5.3"
     },
